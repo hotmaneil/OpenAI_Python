@@ -1,10 +1,18 @@
 from openai import OpenAI
+import os
+from dotenv import load_dotenv
 
-client = OpenAI(api_key="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")
+# 載入 .env 檔案
+load_dotenv()
+
+# 讀取環境變數
+apiKey = os.getenv("API_KEY")
+
+client = OpenAI(api_key=apiKey)
 
 response = client.chat.completions.create(
     model="gpt-4.1",
-    messages=[{"role": "user", "content": "吃香蕉可以預防抽筋嗎"}]
+    messages=[{"role": "user", "content": "腰的骨頭有點痛怎麼辦?"}]
 )
 
 print(response.choices[0].message.content)
